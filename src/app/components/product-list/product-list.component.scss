@@ -1,0 +1,27 @@
+.container {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+}
+
+mat-card {
+  max-height: 400px;
+  display: flex;
+  flex-direction: column;
+
+  > img {
+    flex: 1;
+  }
+
+  mat-card-actions {
+    background: grey;
+    margin: 0;
+    padding: 0;
+
+    > button {
+      width: 100%;
+    }
+  }
+}
