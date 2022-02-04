@@ -1,0 +1,33 @@
+section {
+  padding: 6px 12px;
+  background-color: #fafafa;
+}
+
+h2 {
+  margin-bottom: 0;
+}
+
+h3 {
+  font-size: 14px;
+}
+
+mat-card {
+  margin-bottom: 8px;
+  max-height: 300px;
+  display: flex;
+  flex-direction: column;
+
+  > img {
+    flex: 1;
+  }
+
+  mat-card-actions {
+    background: grey;
+    margin: 0;
+    padding: 0;
+
+    > button {
+      width: 100%;
+    }
+  }
+}
