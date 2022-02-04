@@ -11,9 +11,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { CartComponent } from './components/cart/cart.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { MatCardModule } from '@angular/material/card';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
-  declarations: [AppComponent, CartComponent, ProductListComponent],
+  declarations: [
+    AppComponent,
+    CartComponent,
+    ProductListComponent,
+    ProductCardComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

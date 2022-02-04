@@ -14,12 +14,4 @@ export class ProductListComponent {
   constructor(private readonly productService: ProductService) {
     this.products$ = this.productService.getProducts();
   }
-
-  onAddToCartButtonClicked(product: Product) {
-    this.productService.addToCart(product);
-  }
-
-  isInCart(product: Product) {
-    return this.productService.cart.includes(product);
-  }
 }

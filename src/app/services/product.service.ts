@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Product, SearchResponse } from '../models';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  public cart: Product[] = [];
+  private cart$ = new BehaviorSubject<Product[]>([]);
 
   constructor(private readonly http: HttpClient) {}
 
@@ -21,11 +22,25 @@ export class ProductService {
     );
   }
 
-  addToCart(product: Product) {
-    this.cart.push(product);
+  getCart(): Observable<Product[]> {
+    return this.cart$.asObservable();
   }
 
-  removeFromCart(product: Product) {
-    this.cart.splice(this.cart.indexOf(product), 1);
+  isInCart(product: Product): Observable<boolean> {
+    return this.getCart().pipe(
+      map((cart) => {
+        return cart.some((p) => p.id === product.id);
+      })
+    );
+  }
+
+  addToCart(product: Product): void {
+    const products = [...this.cart$.getValue(), product];
+    this.cart$.next(products);
+  }
+
+  removeFromCart(product: Product): void {
+    const products = this.cart$.getValue().filter((p) => p.id !== product.id);
+    this.cart$.next(products);
   }
 }

@@ -1,4 +1,4 @@
-<section>
+<section *ngIf="cart$ | async as cart">
   <h2>Panier</h2>
   <h3>{{ cart.length }} articles</h3>
 

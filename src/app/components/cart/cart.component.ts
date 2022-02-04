@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Product } from 'src/app/models';
 import { ProductService } from 'src/app/services/product.service';
 
@@ -8,10 +9,10 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
-  cart: Product[];
+  cart$: Observable<Product[]>;
 
   constructor(private readonly productService: ProductService) {
-    this.cart = this.productService.cart;
+    this.cart$ = this.productService.getCart();
   }
 
   onRemoveFromCartButtonClicked(product: Product) {
