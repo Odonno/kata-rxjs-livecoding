@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Product, SearchResponse } from 'src/app/models';
-import { ProductService } from 'src/app/services/product.service';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/features';
+import * as ProductsActions from 'src/app/features/products/products.actions';
+import { selectProducts } from 'src/app/features/products/products.selectors';
 
 @Component({
   selector: 'app-product-list',
@@ -9,9 +10,9 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-list.component.scss'],
 })
 export class ProductListComponent {
-  products$: Observable<SearchResponse<Product>>;
+  products$ = this.store.select(selectProducts);
 
-  constructor(private readonly productService: ProductService) {
-    this.products$ = this.productService.getProducts();
+  constructor(private readonly store: Store<AppState>) {
+    this.store.dispatch(ProductsActions.loadProducts());
   }
 }

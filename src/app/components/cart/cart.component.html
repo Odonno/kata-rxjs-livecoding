@@ -1,6 +1,6 @@
 <section *ngIf="cart$ | async as cart">
   <h2>Panier</h2>
-  <h3>{{ cart.length }} articles</h3>
+  <h3>{{ count$ | async }} articles</h3>
 
   <mat-card *ngFor="let product of cart">
     <mat-card-header>
@@ -22,7 +22,7 @@
     <mat-card-actions>
       <button mat-button (click)="onRemoveFromCartButtonClicked(product)">
         <mat-icon>remove</mat-icon>
-        <span>RETIRER AU PANIER</span>
+        <span>RETIRER DU PANIER</span>
       </button>
     </mat-card-actions>
   </mat-card>

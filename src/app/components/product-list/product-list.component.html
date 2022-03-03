@@ -1,7 +1,7 @@
 <div class="container">
   <ng-container>
     <app-product-card
-      *ngFor="let product of (products$ | async)?.content"
+      *ngFor="let product of products$ | async"
       [product]="product"
     ></app-product-card>
   </ng-container>

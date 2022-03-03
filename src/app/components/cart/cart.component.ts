@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/features';
 import { Product } from 'src/app/models';
-import { ProductService } from 'src/app/services/product.service';
+import * as CartActions from 'src/app/features/cart/cart.actions';
+import {
+  selectCart,
+  selectCartCount,
+} from 'src/app/features/cart/cart.selectors';
 
 @Component({
   selector: 'app-cart',
@@ -9,13 +14,12 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent {
-  cart$: Observable<Product[]>;
+  cart$ = this.store.select(selectCart);
+  count$ = this.store.select(selectCartCount);
 
-  constructor(private readonly productService: ProductService) {
-    this.cart$ = this.productService.getCart();
-  }
+  constructor(private readonly store: Store<AppState>) {}
 
   onRemoveFromCartButtonClicked(product: Product) {
-    this.productService.removeFromCart(product);
+    this.store.dispatch(CartActions.removeFromCart({ product }));
   }
 }

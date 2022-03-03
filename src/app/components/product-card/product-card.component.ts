@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from 'src/app/models';
-import { ProductService } from 'src/app/services/product.service';
+import * as CartActions from 'src/app/features/cart/cart.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/features';
 
 @Component({
   selector: 'app-product-card',
@@ -13,15 +15,15 @@ export class ProductCardComponent implements OnInit {
 
   isInCart$?: Observable<boolean>;
 
-  constructor(private readonly productService: ProductService) {}
+  constructor(private readonly store: Store<AppState>) {}
 
   ngOnInit(): void {
-    if (this.product) {
-      this.isInCart$ = this.productService.isInCart(this.product);
-    }
+    this.isInCart$ = this.store.select((state) =>
+      state.cart.products.some((p) => p.id === this.product?.id)
+    );
   }
 
   onAddToCartButtonClicked(product: Product) {
-    this.productService.addToCart(product);
+    this.store.dispatch(CartActions.addToCart({ product }));
   }
 }
