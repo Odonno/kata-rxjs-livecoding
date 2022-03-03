@@ -1,4 +1,3 @@
-import { ActionReducerMap } from '@ngrx/store';
 import { cartReducer, CartState } from './cart/cart.reducers';
 import { productsReducer, ProductsState } from './products/products.reducers';
 
@@ -7,7 +6,7 @@ export type AppState = {
   products: ProductsState;
 };
 
-export const appReducers: ActionReducerMap<AppState> = {
+export const appReducers = {
   cart: cartReducer,
   products: productsReducer,
 };
